@@ -7,6 +7,7 @@ import suanpan
 from suanpan.app import app
 from suanpan.app.arguments import Json
 from utils.utils import reCalcHoleGrid, preMain
+from suanpan.storage import storage
 
 
 @app.input(Json(key="inputData1"))
@@ -19,10 +20,13 @@ def GridPreStream(context):
 
     args = context.args
     inputData = args.inputData1
-    imagePath = inputData["image"]
+    imageUrl = inputData["image"]
     points = inputData["points"]
     heightReal = inputData["heightReal"]
     widthReal = inputData["widthReal"]
+    imagePath = os.path.join("/spnext", imageUrl)
+
+    storage.download(imageUrl, imagePath)
 
     inputFolder = os.path.split(imagePath)[0]
     img = os.path.split(imagePath)[1]
@@ -42,7 +46,12 @@ def GridPreStream(context):
         points=points,
     )
 
-    outputData = {"files": os.path.join(inputFolder, "result_" + img)}
+    storage.upload(
+        os.path.join(imageUrl, "result_" + img),
+        os.path.join(inputFolder, "result_" + img),
+    )
+
+    outputData = {"files": os.path.join(imageUrl, "result_" + img)}
 
     return outputData
 
