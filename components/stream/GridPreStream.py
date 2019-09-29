@@ -57,4 +57,4 @@ def GridPreStream(context):
 
 
 if __name__ == "__main__":
-    suanpan.run(GridPre)
+    suanpan.run(app)
