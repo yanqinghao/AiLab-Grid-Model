@@ -32,8 +32,6 @@ def GridPreStream(context):
 
     storage.download(imageUrl, imagePath)
 
-    inputFolder = os.path.split(imagePath)[0]
-    img = os.path.split(imagePath)[1]
     if func == "preMain":
         preMain(
             imgpath=imagePath,
