@@ -32,10 +32,12 @@ def GridPreStream(context):
 
     storage.download(imageUrl, imagePath)
 
+    imgFolder = os.path.splitext(imagePath)[0]
+
     if func == "preMain":
         preMain(
             imgpath=imagePath,
-            saved_path=os.path.join(imagePath, "result"),
+            saved_path=os.path.join(imgFolder, "result"),
             model_path=os.path.join(
                 os.path.dirname(os.path.abspath(sys.argv[0])), "utils", "model"
             ),
@@ -45,7 +47,7 @@ def GridPreStream(context):
     elif func == "reCalcHoleGrid":
         reCalcHoleGrid(
             png_path=imagePath,
-            json_path=os.path.join(imagePath, "result", "response.json"),
+            json_path=os.path.join(imgFolder, "result", "response.json"),
             rectangle=rectangle,
             points=points,
         )
@@ -54,10 +56,11 @@ def GridPreStream(context):
         raise Exception("Undefined Function")
 
     storage.upload(
-        os.path.join(imageUrl, "result"), os.path.join(imagePath, "result")
+        os.path.join(os.path.splitext(imageUrl)[0], "result"),
+        os.path.join(imgFolder, "result"),
     )
 
-    outputData = {"files": os.path.join(imageUrl, "result")}
+    outputData = {"files": os.path.join(os.path.splitext(imageUrl)[0], "result")}
 
     return outputData
 
