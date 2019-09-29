@@ -15,7 +15,7 @@ from utils.utils import reCalcHoleGrid, preMain
 # @app.param(Float(key="heightReal", default=1.0289))
 # @app.param(Float(key="widthReal", default=1.0294))
 @app.output(Json(key="outputData1"))
-def GridPre(context):
+def GridPreStream(context):
 
     args = context.args
     inputData = args.inputData1
