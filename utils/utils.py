@@ -19,7 +19,7 @@ import time
 def build_dir(target):
     # 对输出生成文件夹
     if not os.path.exists(target):
-        os.mkdir(target)
+        os.makedirs(target)
     if not os.path.exists('%s/SegmentationClassPNG' % target):
         os.mkdir('%s/SegmentationClassPNG' % target)
     if not os.path.exists('%s/JPEGImages' % target):
