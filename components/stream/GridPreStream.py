@@ -31,8 +31,12 @@ def GridPreStream(context):
     imagePath = os.path.join("/spnext", imageUrl)
 
     storage.download(imageUrl, imagePath)
-
-    imgFolder = os.path.splitext(imagePath)[0]
+    if os.path.isfile(imagePath):
+        imgFolder = os.path.splitext(imagePath)[0]
+        uploadFolder = os.path.splitext(imageUrl)[0]
+    else:
+        imgFolder = imagePath
+        uploadFolder = imageUrl
 
     if func == "preMain":
         preMain(
@@ -56,11 +60,10 @@ def GridPreStream(context):
         raise Exception("Undefined Function")
 
     storage.upload(
-        os.path.join(os.path.splitext(imageUrl)[0], "result"),
-        os.path.join(imgFolder, "result"),
+        os.path.join(uploadFolder, "result"), os.path.join(imgFolder, "result")
     )
 
-    outputData = {"files": os.path.join(os.path.splitext(imageUrl)[0], "result")}
+    outputData = {"files": os.path.join(uploadFolder, "result")}
 
     return outputData
 
