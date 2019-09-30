@@ -32,8 +32,8 @@ def GridPreStream(context):
 
     storage.download(imageUrl, imagePath)
     if os.path.isfile(imagePath):
-        imgFolder = os.path.splitext(imagePath)[0]
-        uploadFolder = os.path.splitext(imageUrl)[0]
+        imgFolder = os.path.split(imagePath)[0]
+        uploadFolder = os.path.split(imageUrl)[0]
     else:
         imgFolder = imagePath
         uploadFolder = imageUrl
