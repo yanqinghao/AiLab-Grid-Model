@@ -1,5 +1,5 @@
 suanpan
-pillow==6.0.0
+pillow==9.3.0
 tqdm
 opencv-contrib-python==3.4.3.18
 opencv-python==3.4.3.18
